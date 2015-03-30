@@ -1,0 +1,24 @@
+.mtable-container {}
+
+.mtable-container .mtable-buttons {
+    margin: 0 0 15px;
+}
+
+.mtable-container .table .form-control {
+    margin-bottom: 0;
+}
+
+.mtable-container .table .form-control {
+    width: 100%;
+}
+
+.mtable-container .table tbody tr td {
+    height: 30px;
+}
+
+.mtable-container .table tbody tr td input[type=text] {
+    height: 30px;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
