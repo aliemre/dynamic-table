@@ -1,24 +1,9 @@
 {
   "titles": [
-    {
-      "id": 1,
-      "name": "ID"
-    },
-    {
-      "id": 2,
-      "name": "Başlık"
-    },
-    {
-      "id": 3,
-      "name": "Genişilik"
-    },
-    {
-      "id": 4,
-      "name": "Yükseklik"
-    },
-    {
-      "id": 5,
-      "name": "Hacim"
-    }
+    { "id": 1, "name": "ID" },
+    { "id": 1, "name": "Başlık" },
+    { "id": 1, "name": "Genişlik" },
+    { "id": 1, "name": "Yükseklik" },
+    { "id": 1, "name": "Hacim" }
   ]
 }

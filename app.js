@@ -1,19 +1,15 @@
 $(document).ready(function(){
 
-    var d = new DynTable();
+    var titles = [
+        { "id": 1, "name": "ID" },
+        { "id": 1, "name": "Başlık" },
+        { "id": 1, "name": "Genişlik" },
+        { "id": 1, "name": "Yükseklik" },
+        { "id": 1, "name": "Hacim" }
+    ];
 
-    d.generateTable();
+    var d = new DynTable(titles);
 
-    $(document).on('click', '#mtable-add-table', function(){
-        d.generateTable();
-    });
-
-    $(document).on('click', '.mtable-add-row', function(){
-        d.addRow($(this));
-    });
-
-    $(document).on('click', '.mtable-add-column', function(){
-        d.addColumn($(this));
-    });
+    d.init();
 
 });

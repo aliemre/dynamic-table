@@ -1,4 +1,7 @@
-.mtable-container {}
+.mtable-container a,
+.mtable-container button {
+    outline: none !important;
+}
 
 .mtable-container .mtable-buttons {
     margin: 0 0 15px;
@@ -10,6 +13,26 @@
 
 .mtable-container .table .form-control {
     width: 100%;
+}
+
+.mtable-container .table {
+    table-layout: fixed;
+}
+
+.mtable-container .table thead tr td {
+    position: relative;
+}
+
+.mtable-container .table thead tr td > div {
+    display: none;
+    position: absolute;
+    z-index: 1000;
+    top: -30px;
+    left: 10px;
+}
+
+.mtable-container .table thead tr td:hover > div {
+    display: block;
 }
 
 .mtable-container .table tbody tr td {
