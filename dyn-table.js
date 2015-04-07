@@ -1,8 +1,13 @@
-var DynTable = function (t) {
+var DynTable = function (t, c) {
 
-    var tableContainers = '#product-tables';
+    if (c === undefined) {
+        c = 0;
+    }
 
-    var titles = t;
+    var titles              = t;
+    var initialColumnLength = 1;
+    var initialRowLength    = 1;
+    var tableContainers     = '#product-tables';
 
     var generateInput = function(tableIndex, rowIndex) {
         return '<input type="text" name="rows[' + tableIndex + '][' + rowIndex + '][]" class="form-control">';
@@ -13,11 +18,11 @@ var DynTable = function (t) {
         var selectbox = '';
 
         selectbox += '' +
-            '<div class="mtable-remove-column">' +
-                '<a class="btn btn-danger" href="#">' +
-                    '<i class="icon-white icon-remove"></i> Sil' +
-                '</a>' +
-            '</div>';
+        '<div class="mtable-remove-column">' +
+        '<a class="btn btn-danger" href="#">' +
+        '<i class="icon-white icon-remove"></i> Sil' +
+        '</a>' +
+        '</div>';
 
         selectbox += '<select name="heads[' + tableIndex + '][]" class="form-control"><option value="">Seçiniz..</option>';
 
@@ -32,10 +37,13 @@ var DynTable = function (t) {
     };
 
     this.init = function(){
-        this.generateTable();
+        if (!c) {
+            this.generateTable();
+        }
         this.addTable();
         this.removeTable();
         this.addRow();
+        this.removeRow();
         this.addColumn();
         this.removeColumn();
         this.enableColumnHover();
@@ -58,21 +66,23 @@ var DynTable = function (t) {
                         '<i class="icon-white icon-remove"></i> Tabloyu Sil' +
                     '</button>' +
                 '</div>' +
-                '<table class="table table-striped tabloe-hover table-bordered">' +
+                '<table class="table table-striped table-bordered">' +
                     '<thead>' +
-                        '<tr>';
-                            for (var i = 0; i < 5; i++) {
-                                tableSchema += '<td class="selectbox-wrapper">' + generateSelectbox(newTableIndex) + '</td>';
-                            }
-                            tableSchema += '' +
-                        '</tr>' +
+                    '<tr>';
+                        tableSchema += '<td style="width: 40px;">&nbsp;</td>';
+                        for (var i = 0; i < initialColumnLength; i++) {
+                            tableSchema += '<td class="selectbox-wrapper">' + generateSelectbox(newTableIndex) + '</td>';
+                        }
+                        tableSchema += '' +
+                    '</tr>' +
                     '</thead>' +
                     '<tbody>';
-                        for (var row = 0; row < 5; row++) {
+                        for (var row = 0; row < initialRowLength; row++) {
                             tableSchema += '<tr>';
-                                for (var column = 0; column < 5; column++) {
-                                    tableSchema += '<td>' + generateInput(newTableIndex, row) + '</td>';
-                                }
+                            tableSchema += '<td style="width: 40px;"><a href="#" class="btn btn-danger mtable-remove-row"><i class="icon-white icon-remove"></i></a></td>';
+                            for (var column = 0; column < initialColumnLength; column++) {
+                                tableSchema += '<td>' + generateInput(newTableIndex, row) + '</td>';
+                            }
                             tableSchema += '</tr>';
                         }
                         tableSchema += '' +
@@ -120,8 +130,28 @@ var DynTable = function (t) {
             $table.find('tbody').append($tableBodyTr.last().clone());
 
             $table.find('tbody tr').last().find('input').each(function(){
-                $(this).attr('name', '[' + tableIndex + '][' + parseInt($tableBodyTr.length + 1) + '][]');
+                $(this).attr('name', 'rows[' + tableIndex + '][' + parseInt($tableBodyTr.length + 1) + '][]');
             });
+
+            setTimeout(function(){
+                $table.find('tbody tr').last().find('input').each(function(){
+                    $(this).val("");
+                });
+            }, 100);
+
+            e.preventDefault();
+
+        });
+
+    };
+
+    this.removeRow = function () {
+
+        $(document).on('click', '.mtable-remove-row', function(e){
+
+            if (confirm("Bu işlem tüm satırı kalıcı olarak silecektir. \nEmin misiniz?")) {
+                $(this).parents('tr').remove();
+            }
 
             e.preventDefault();
 
@@ -147,7 +177,7 @@ var DynTable = function (t) {
                 var $_this = $(this);
                 var $_td   = $(this).find('td').last();
                 $_td.html(input);
-                $_td.find('input').attr('name', '['+tableIndex+']['+$_this.index()+'][]');
+                $_td.find('input').attr('name', 'rows['+tableIndex+']['+$_this.index()+'][]');
 
             });
 

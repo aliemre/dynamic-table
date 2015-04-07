@@ -8,7 +8,7 @@ $(document).ready(function(){
         { "id": 1, "name": "Hacim" }
     ];
 
-    var d = new DynTable(titles);
+    var d = new DynTable(titles, 0);
 
     d.init();
 
