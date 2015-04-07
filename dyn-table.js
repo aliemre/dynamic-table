@@ -7,7 +7,7 @@ var DynTable = function (t, c) {
     var titles              = t;
     var initialColumnLength = 1;
     var initialRowLength    = 1;
-    var tableContainers     = '#product-tables';
+    var tableContainers     = '#tables';
 
     var generateInput = function(tableIndex, rowIndex) {
         return '<input type="text" name="rows[' + tableIndex + '][' + rowIndex + '][]" class="form-control">';
@@ -19,9 +19,9 @@ var DynTable = function (t, c) {
 
         selectbox += '' +
         '<div class="mtable-remove-column">' +
-        '<a class="btn btn-danger" href="#">' +
-        '<i class="icon-white icon-remove"></i> Sil' +
-        '</a>' +
+            '<a class="btn btn-danger" href="#">' +
+                '<i class="icon-white icon-remove"></i> Sil' +
+            '</a>' +
         '</div>';
 
         selectbox += '<select name="heads[' + tableIndex + '][]" class="form-control"><option value="">Seçiniz..</option>';
